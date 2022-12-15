@@ -98,7 +98,7 @@
                                     <th>@lang('movies.title')</th>
                                     <th>@lang('genres.genres')</th>
                                     <th>@lang('movies.vote')</th>
-                                    <th>@lang('movies.vote_count')</th>
+                                    <th>@lang('movies.vote_co unt')</th>
                                     <th>@lang('movies.release_date')</th>
                                     <th>@lang('movies.favourite_by')</th>
                                     <th>@lang('site.action')</th>

@@ -23,7 +23,9 @@
             <li>
                 <a class="app-menu__item {{ request()->is('*roles*') ? 'active' : '' }}"
                    href="{{ route('admin.roles.index') }}">
-                    <i class="app-menu__icon fa fa-lock"></i> <span class="app-menu__label">@lang('roles.roles')</span></a>
+                    <i class="app-menu__icon fa fa-lock"></i>
+                    <span class="app-menu__label">@lang('roles.roles')</span>
+                </a>
             </li>
         @endif
         {{--        // admin--}}
@@ -31,7 +33,8 @@
             <li>
                 <a class="app-menu__item {{ request()->is('*admins*') ? 'active' : '' }}"
                    href="{{ route('admin.admins.index') }}"><i class="app-menu__icon fa fa-users"></i><span
-                        class="app-menu__label">Admin</span></a>
+                        class="app-menu__label">@lang('admins.admins')</span>
+                </a>
             </li>
             {{--            //user--}}
         @endif
@@ -39,9 +42,33 @@
             <li>
                 <a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}"
                    href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i><span
-                        class="app-menu__label">User</span></a>
+                        class="app-menu__label">@lang('users.users')</span>
+                </a>
             </li>
         @endif
+
+        {{--genres--}}
+        @if (auth()->user()->hasPermission('read_genres'))
+            <li>
+                <a class="app-menu__item {{ request()->is('*genres*') ? 'active' : '' }}"
+                   href="{{ route('admin.genres.index') }}">
+                    <i class="app-menu__icon fa fa-list"></i>
+                    <span class="app-menu__label">@lang('genres.genres')</span>
+                </a>
+            </li>
+        @endif
+
+        {{--movies--}}
+        @if (auth()->user()->hasPermission('read_movies'))
+            <li>
+                <a class="app-menu__item {{ request()->is('*movies*') ? 'active' : '' }}"
+                   href="{{ route('admin.movies.index') }}">
+                    <i class="app-menu__icon fa fa-film"></i>
+                    <span class="app-menu__label">@lang('movies.movies')</span>
+                </a>
+            </li>
+        @endif
+
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))
             <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">

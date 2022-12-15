@@ -2,11 +2,18 @@
 
 namespace App\Console;
 
+use App\Console\Commands\GetGenres;
+use App\Console\Commands\GetMovies;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        GetGenres::class,
+        GetMovies::class,
+    ];
     /**
      * Define the application's command schedule.
      *
