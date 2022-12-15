@@ -41,7 +41,9 @@ class GetGenres extends Command
     {
 //        dd([config('services.tmdb.base_url'),config('services.tmdb.api_key')]);
 
-        $response = Http::get(config('services.tmdb.base_url') . 'genre/movie/list?api_key=' . config('services.tmdb.api_key'));
+        $response = Http::get(config('services.tmdb.base_url') .
+            'genre/movie/list?api_key=' .
+            config('services.tmdb.api_key'));
         foreach ($response->json()['genres'] as $genre) {
             Genre::create([
                 'e_id' => $genre['id'],

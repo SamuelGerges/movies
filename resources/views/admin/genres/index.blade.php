@@ -63,7 +63,7 @@
                                     </th>
                                     <th>@lang('genres.name')</th>
                                     <th>@lang('genres.movies_count')</th>
-{{--                                    <th>@lang('genres.related_movies')</th>--}}
+                                    <th>@lang('genres.related_movies')</th>
                                     <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -102,7 +102,7 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'name', name: 'name'},
                 {data: 'movies_count', name: 'movies_count', searchable: false},
-                // {data: 'related_movies', name: 'related_movies', searchable: false, sortable: false},
+                {data: 'related_movies', name: 'related_movies', searchable: false, sortable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],

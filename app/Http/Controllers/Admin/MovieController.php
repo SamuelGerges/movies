@@ -33,6 +33,7 @@ class MovieController extends Controller
     public function data()
     {
         $movies = Movie::whenGenreId(request()->genre_id)
+            ->whenActorid(request()->actor_id)
             ->with('genres');
 
         return DataTables::of($movies)

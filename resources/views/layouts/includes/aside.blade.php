@@ -69,6 +69,17 @@
             </li>
         @endif
 
+        {{--actors--}}
+        @if (auth()->user()->hasPermission('read_actors'))
+            <li>
+                <a class="app-menu__item {{ request()->is('*actors*') ? 'active' : '' }}"
+                   href="{{ route('admin.actors.index') }}">
+                    <i class="app-menu__icon fa fa-address-book"></i>
+                    <span class="app-menu__label">@lang('actors.actors')</span>
+                </a>
+            </li>
+        @endif
+
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))
             <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">

@@ -23,21 +23,13 @@ class ActorController extends Controller
             $actors = Actor::where('name', 'like', '%' . request()->search . '%')
                 ->limit(10)
                 ->get();
-
             $results = [];
-
             $results[] = ['id' => '', 'text' => 'All Actors'];
-
             foreach ($actors as $actor) {
-
                 $results[] = ['id' => $actor->id, 'text' => $actor->name];
-
             }//end of for each
-
             return json_encode($results);
-
         }//end of if
-
         return view('admin.actors.index');
 
     }// end of index
@@ -72,7 +64,6 @@ class ActorController extends Controller
     public function bulkDelete()
     {
         foreach (json_decode(request()->record_ids) as $recordId) {
-
             $actor = Actor::FindOrFail($recordId);
             $this->delete($actor);
 

@@ -98,9 +98,9 @@
                                     <th>@lang('movies.title')</th>
                                     <th>@lang('genres.genres')</th>
                                     <th>@lang('movies.vote')</th>
-                                    <th>@lang('movies.vote_co unt')</th>
+                                    <th>@lang('movies.vote_count')</th>
                                     <th>@lang('movies.release_date')</th>
-                                    <th>@lang('movies.favourite_by')</th>
+{{--                                    <th>@lang('movies.favourite_by')</th>--}}
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -151,7 +151,7 @@
                 {data: 'vote', name: 'vote', searchable: false},
                 {data: 'vote_count', name: 'vote_count', searchable: false},
                 {data: 'release_date', name: 'release_date', searchable: false},
-                {data: 'favorite_by_users_count', name: 'favorite_by_users_count', searchable: false},
+                // {data: 'favorite_by_users_count', name: 'favorite_by_users_count', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[5, 'desc']],
@@ -164,7 +164,7 @@
         });
 
         $('#genre').on('change', function () {
-            genre = this.value;
+           genre = this.value;
             moviesTable.ajax.reload();
         })
 
