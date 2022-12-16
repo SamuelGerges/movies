@@ -34,6 +34,7 @@ class MovieController extends Controller
     {
         $movies = Movie::whenGenreId(request()->genre_id)
             ->whenActorid(request()->actor_id)
+            ->whenType(request()->type)
             ->with('genres');
 
         return DataTables::of($movies)
@@ -57,7 +58,6 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         $movie->load(['genres', 'actors', 'images']);
-
         return view('admin.movies.show', compact('movie'));
 
     }// end of show

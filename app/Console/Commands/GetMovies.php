@@ -42,6 +42,8 @@ class GetMovies extends Command
     public function handle()
     {
         $this->getPopularMovies();
+        $this->getNowPlayingMovies();
+        $this->getUpcomingMovies();
     }
 
     private function getPopularMovies()
@@ -67,18 +69,80 @@ class GetMovies extends Command
                     ]);  // end of updateOrCreate
                 $this->attachGenres($result, $movie);
                 $this->attachActors($movie);
+                $this->getImages($movie);
 
             }
         }
 
     }// end of getPopularMovies
 
+    private function getNowPlayingMovies()
+    {
+        for ($i = 1; $i <= config('services.tmdb.max_pages'); $i++) {
+            $response = Http::get(config('services.tmdb.base_url') .
+                'movie/now_playing?api_key=' . config('services.tmdb.api_key') .
+                '&page=' . $i);
+            foreach ($response->json()['results'] as $result) {
+                $movie = Movie::updateOrCreate(
+                    [
+                        'e_id' => $result['id'],
+                        'title' => $result['title'],
+                    ],
+                    [
+                        'description' => $result['overview'],
+                        'poster' => $result['poster_path'],
+                        'banner' => $result['backdrop_path'],
+                        'type' => 'now_playing',
+                        'release_date' => $result['release_date'],
+                        'vote' => $result['vote_average'],
+                        'vote_count' => $result['vote_count'],
+
+                    ]);  // end of updateOrCreate
+                $this->attachGenres($result, $movie);
+                $this->attachActors($movie);
+                $this->getImages($movie);
+
+            }
+        }
+
+    }// end of getNowPlayingMovies
+    private function getUpcomingMovies()
+    {
+        for ($i = 1; $i <= config('services.tmdb.max_pages'); $i++) {
+            $response = Http::get(config('services.tmdb.base_url') .
+                'movie/upcoming?api_key=' . config('services.tmdb.api_key') .
+                '&page=' . $i);
+            foreach ($response->json()['results'] as $result) {
+                $movie = Movie::updateOrCreate(
+                    [
+                        'e_id' => $result['id'],
+                        'title' => $result['title'],
+                    ],
+                    [
+                        'description' => $result['overview'],
+                        'poster' => $result['poster_path'],
+                        'banner' => $result['backdrop_path'],
+                        'type' => 'upcoming',
+                        'release_date' => $result['release_date'],
+                        'vote' => $result['vote_average'],
+                        'vote_count' => $result['vote_count'],
+
+                    ]);  // end of updateOrCreate
+                $this->attachGenres($result, $movie);
+                $this->attachActors($movie);
+                $this->getImages($movie);
+
+            }
+        }
+
+    }// end of getUpcomingMovies
+
 
     private function attachGenres($result, Movie $movie)
     {
         foreach ($result['genre_ids'] as $genre_id) {
             $genre = Genre::where('e_id', $genre_id)->first();
-            $movie->genres()->attach($genre->id);
+            $movie->genres()->syncWithoutDetaching($genre->id);
         }//end foreach of genre
     } // end od attachgenre
 
@@ -104,5 +168,19 @@ class GetMovies extends Command
             $movie->actors()->syncWithoutDetaching($actor);
         } // end foreach
     } // end od attchActors
+
+    private function getImages(Movie $movie)
+    {
+        $response = Http::get(config('services.tmdb.base_url') .
+            'movie/' . $movie->e_id . '/images?api_key=' .
+            config('services.tmdb.api_key'));
+        $movie->images()->delete();
+        foreach ($response->json()['backdrops'] as $index => $image) {
+            if($index == 5) break;
+            $movie->images()->create([
+                'image' => $image['file_path'],
+            ]);
+        } // end foreach
+    }
 
 }

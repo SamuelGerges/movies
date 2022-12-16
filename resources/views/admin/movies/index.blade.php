@@ -182,7 +182,7 @@
             moviesTable.search(this.value).draw();
         })
 
-        $('#actor').select2({
+         $('#actor').select2({
             ajax: {
                 url: "{{ route('admin.actors.index') }}",
                 dataType: 'json',

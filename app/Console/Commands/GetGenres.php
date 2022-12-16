@@ -45,10 +45,13 @@ class GetGenres extends Command
             'genre/movie/list?api_key=' .
             config('services.tmdb.api_key'));
         foreach ($response->json()['genres'] as $genre) {
-            Genre::create([
-                'e_id' => $genre['id'],
-                'name' => $genre['name']
-            ]);
+            Genre::updateOrCreate(
+                [
+                    'e_id' => $genre['id'],
+                ],
+                [
+                    'name' => $genre['name']
+                ]);
         }
     }
 }
