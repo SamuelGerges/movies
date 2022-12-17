@@ -14,7 +14,9 @@ Route::middleware(['auth', 'role:super_admin|admin'])->group(function () {
 
 
         // TODO :: home routes
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/home/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
+        Route::get('/home/movies_chart', 'HomeController@moviesChart')->name('home.movies_chart');
+        Route::get('/home', 'HomeController@index')->name('home');
 
         // TODO:: role routes
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');

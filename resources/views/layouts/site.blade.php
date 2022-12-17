@@ -59,6 +59,10 @@
     {{--magnific-popup--}}
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/magnific-popup/magnific-popup.css') }}">
 
+{{--    apexchar--}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
     {{--<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>--}}
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>--}}
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>--}}
@@ -86,8 +90,8 @@
             border: 8px solid #f3f3f3;
             border-radius: 50%;
             border-top: 8px solid #009688;
-            width: 90px;
-            height: 90px;
+            width: 60px;
+            height: 60px;
         }
 
         /* Safari */
