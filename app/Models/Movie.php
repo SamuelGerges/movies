@@ -83,7 +83,6 @@ class Movie extends Model
             return $q->where('title', 'like', '%' . $search . '%');
 
         });
-
     }// end of scopeWhenSearch
 
     //rel

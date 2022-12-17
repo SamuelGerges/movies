@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/movies/toggle_movie', 'MovieController@toggleFavorite');
 
     //user route
-    Route::get('/user', 'AuthController@user');
+    Route::get('/user-data', 'AuthController@userData');
 });

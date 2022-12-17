@@ -35,7 +35,8 @@ class MovieController extends Controller
         $movies = Movie::whenGenreId(request()->genre_id)
             ->whenActorid(request()->actor_id)
             ->whenType(request()->type)
-            ->with('genres');
+            ->with('genres')
+            ->withCount(['favoriteByUsers']);
 
         return DataTables::of($movies)
             ->addColumn('record_select', 'admin.movies.data_table.record_select')

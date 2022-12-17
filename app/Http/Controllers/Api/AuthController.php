@@ -50,12 +50,19 @@ class AuthController extends Controller
         }
 
 
-        $user = User::create(array_merge($validator->validated(),[
+        $user = User::create(array_merge($validator->validated(), [
             'type' => 'user',
         ]));
 
         $data['user'] = new UserResource($user);
         $data['token'] = $user->createToken('my-app-token')->plainTextToken;
+        return response()->api($data);
+
+    }
+
+    public function userData()
+    {
+        $data['user'] = new UserResource(auth()->user('sanctum'));
         return response()->api($data);
 
     }
