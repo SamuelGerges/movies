@@ -47,16 +47,14 @@ class HomeController extends Controller
 
     public function moviesChart()
     {
-        $movies = Movie::whereYear('release_date', request()->year)
-            ->select(
-                '*',
+        $movies = Movie::whereYear('release_date', 2022)
+            ->select('*',
                 DB::raw('MONTH(release_date) as month'),
                 DB::raw('YEAR(release_date) as year'),
                 DB::raw('COUNT(id) as total_movies'),
             )
             ->groupBy('month')
             ->get();
-
         return view('admin._movies_chart', compact('movies'));
 
     }// end of moviesChart

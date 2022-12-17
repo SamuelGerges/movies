@@ -154,7 +154,7 @@ class GetMovies extends Command
 
         foreach ($response->json()['cast'] as $index => $cast) {
             if ($cast['known_for_department'] !== 'Acting') continue;
-            if ($index == 7) break;
+            if ($index == 8) break;
 
             $actor = Actor::where('e_id', $cast['id'])->first();
             if (!$actor) {
@@ -167,7 +167,7 @@ class GetMovies extends Command
 
             $movie->actors()->syncWithoutDetaching($actor);
         } // end foreach
-    } // end od attchActors
+    } // end od attchActors`
 
     private function getImages(Movie $movie)
     {
@@ -176,7 +176,7 @@ class GetMovies extends Command
             config('services.tmdb.api_key'));
         $movie->images()->delete();
         foreach ($response->json()['backdrops'] as $index => $image) {
-            if($index == 5) break;
+            if($index == 15) break;
             $movie->images()->create([
                 'image' => $image['file_path'],
             ]);
