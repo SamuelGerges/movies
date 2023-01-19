@@ -16,6 +16,14 @@
                 <i class="app-menu__icon fa fa-home"></i>
                 <span class="app-menu__label">@lang('site.home')</span>
             </a>
+
+        </li>
+
+        <li>
+            <a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.sliders.index') }}">
+                <i class="app-menu__icon fa fa-image"></i>
+                <span class="app-menu__label">Sliders</span>
+            </a>
         </li>
 
         {{--roles--}}

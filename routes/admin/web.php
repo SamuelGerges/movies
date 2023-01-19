@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GenreController;
@@ -17,6 +18,10 @@ Route::middleware(['auth', 'role:super_admin|admin'])->group(function () {
         Route::get('/home/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
         Route::get('/home/movies_chart', 'HomeController@moviesChart')->name('home.movies_chart');
         Route::get('/home', 'HomeController@index')->name('home');
+
+        // TODO ::: slider routes
+
+        Route::resource('sliders','SliderController')->except('show');
 
         // TODO:: role routes
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
